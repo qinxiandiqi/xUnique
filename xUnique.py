@@ -364,7 +364,8 @@ Please check:
         targets_list = self.root_node['targets']
         # workaround for PBXTargetDependency referring target that have not been iterated
         for target_hex in targets_list:
-            cur_path_key = ('productName', 'name')
+            cur_node = self.nodes[target_hex]
+            cur_path_key = 'name' if cur_node['isa'] == "PBXAggregateTarget" else ('productName', 'name')
             self.__set_to_result(project_hex, target_hex, cur_path_key)
         for target_hex in targets_list:
             self.__unique_target(target_hex)
